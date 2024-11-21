@@ -7,11 +7,22 @@ class PessoaController extends Controller {
   constructor() {
     super(pessoaServices);
   }
-  async pegaMatriculas(req, res) {
-    const { estudanteId } = req.params;
+  async pegaMatriculasAtivas(req, res) {
+    const { estudante_id } = req.params;
     try {
-      const listaMatriculas = await pessoaServices.pegaMatriculasPorEstudante(
-        Number(estudanteId)
+      const listaMatriculas = await pessoaServices.pegaMatriculasAtivasPorEstudante(
+        Number(estudante_id)
+      );
+      return res.status(200).json(listaMatriculas);
+    } catch (err) {
+      throw new Error(err);
+    }
+  }
+  async pegaTodasAsMatriculas(req, res) {
+    const { estudante_id } = req.params;
+    try {
+      const listaMatriculas = await pessoaServices.pegaTodasMatriculasPorEstudante(
+        Number(estudante_id)
       );
       return res.status(200).json(listaMatriculas);
     } catch (err) {
